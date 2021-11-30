@@ -43,7 +43,7 @@ namespace Benchmark
                 Stopwatch stopwatch = new Stopwatch();
 
                 stopwatch.Start();
-                
+
                 context.Tests.Add(new Test { Value1 = rnd.Next(1, 11), Value2 = rnd.Next(1, 11), Value3 = rnd.Next(1, 11), Value4 = rnd.Next(1, 11), Value5 = rnd.Next(1, 11) });
                 context.SaveChanges();
 
@@ -125,5 +125,104 @@ namespace Benchmark
             return 0;
         }
 
+        public long UpdateAllRows()
+        {
+            try
+            {
+                Stopwatch stopwatch = new Stopwatch();
+
+                stopwatch.Start();
+
+                var values = context.Tests.Select(x => x).ToList();
+
+                foreach (Test item in values)
+                {
+                    item.Value1 = 1;
+                }
+
+                context.SaveChanges();
+
+                stopwatch.Stop();
+
+                return stopwatch.ElapsedMilliseconds;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return 0;
+        }
+
+        public long Update1Row()
+        {
+            try
+            {
+                Stopwatch stopwatch = new Stopwatch();
+
+                stopwatch.Start();
+
+                var value = context.Tests.FirstOrDefault();
+
+                value.Value1 = 1;
+
+                context.SaveChanges();
+
+                stopwatch.Stop();
+
+                return stopwatch.ElapsedMilliseconds;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return 0;
+        }
+
+        public long Delete1Row()
+        {
+            try
+            {
+                Stopwatch stopwatch = new Stopwatch();
+
+                stopwatch.Start();
+
+                var value = context.Tests.FirstOrDefault();
+                context.Tests.Remove(value);
+                context.SaveChanges();
+
+                stopwatch.Stop();
+
+                return stopwatch.ElapsedMilliseconds;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return 0;
+        }
+
+        public long DeleteAllRows()
+        {
+            try
+            {
+                Stopwatch stopwatch = new Stopwatch();
+
+                stopwatch.Start();
+
+                context.Tests.RemoveRange(context.Tests.Select(x => x).Take(1000));
+                stopwatch.Stop();
+
+                return stopwatch.ElapsedMilliseconds;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return 0;
+        }
     }
 }

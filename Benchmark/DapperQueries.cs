@@ -108,5 +108,75 @@ namespace Benchmark
                 return stopwatch.ElapsedMilliseconds;
             }
         }
+
+        public long UpdateAllRows()
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                Stopwatch stopwatch = new Stopwatch();
+
+                string query = "UPDATE Tests SET Value1 = 1";
+                stopwatch.Start();
+
+                db.Execute(query);
+
+                stopwatch.Stop();
+
+                return stopwatch.ElapsedMilliseconds;
+            }
+        }
+
+        public long Update1Row()
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                Stopwatch stopwatch = new Stopwatch();
+
+                string query = "UPDATE Tests SET Value1 = 3 WHERE Id = 400";
+                stopwatch.Start();
+
+                db.Execute(query);
+
+                stopwatch.Stop();
+
+                return stopwatch.ElapsedMilliseconds;
+            }
+        }
+
+        public long Delete1Row()
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                Stopwatch stopwatch = new Stopwatch();
+
+                string query = $"DELETE TOP(1) FROM Tests";
+                stopwatch.Start();
+
+                db.Execute(query);
+
+                stopwatch.Stop();
+
+                return stopwatch.ElapsedMilliseconds;
+            }
+        }
+
+        public long DeleteAllRows()
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                Stopwatch stopwatch = new Stopwatch();
+                Random rnd = new Random();
+
+                string query = $"DELETE TOP(1000) FROM Tests";
+                stopwatch.Start();
+
+                db.Execute(query);
+
+                stopwatch.Stop();
+
+                return stopwatch.ElapsedMilliseconds;
+            }
+        }
+
     }
 }

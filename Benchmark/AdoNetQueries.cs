@@ -160,5 +160,118 @@ namespace Benchmark
             return 0;
         }
 
+        public long UpdateAllRows()
+        {
+            try
+            {
+                _sqlConnection.Open();
+
+                Stopwatch stopwatch = new Stopwatch();
+                SqlCommand command;
+                stopwatch.Start();
+
+                string query = "UPDATE Tests SET Value1 = 1";
+                command = new SqlCommand(query, _sqlConnection);
+                command.ExecuteNonQuery();
+
+                stopwatch.Stop();
+
+                _sqlConnection.Close();
+
+                return stopwatch.ElapsedMilliseconds;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return 0;
+        }
+
+        public long Update1Row()
+        {
+            try
+            {
+                _sqlConnection.Open();
+
+                Stopwatch stopwatch = new Stopwatch();
+                SqlCommand command;
+                stopwatch.Start();
+
+                string query = "UPDATE Tests SET Value1 = 3 WHERE Id = 400";
+                command = new SqlCommand(query, _sqlConnection);
+                command.ExecuteNonQuery();
+
+                stopwatch.Stop();
+
+                _sqlConnection.Close();
+
+                return stopwatch.ElapsedMilliseconds;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return 0;
+        }
+
+        public long Delete1Row()
+        {
+            try
+            {
+                _sqlConnection.Open();
+
+                Stopwatch stopwatch = new Stopwatch();
+                Random rnd = new Random();
+                SqlCommand command;
+                stopwatch.Start();
+
+                string query = $"DELETE FROM Tests WHERE Id = {rnd.Next(1001)}";
+                command = new SqlCommand(query, _sqlConnection);
+                command.ExecuteNonQuery();
+
+                stopwatch.Stop();
+
+                _sqlConnection.Close();
+
+                return stopwatch.ElapsedMilliseconds;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return 0;
+        }
+
+        public long DeleteAllRows()
+        {
+            try
+            {
+                _sqlConnection.Open();
+
+                Stopwatch stopwatch = new Stopwatch();
+                SqlCommand command;
+                stopwatch.Start();
+
+                string query = $"DELETE TOP(1) FROM Tests";
+                command = new SqlCommand(query, _sqlConnection);
+                command.ExecuteNonQuery();
+
+                stopwatch.Stop();
+
+                _sqlConnection.Close();
+
+                return stopwatch.ElapsedMilliseconds;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return 0;
+        }
+
     }
 }

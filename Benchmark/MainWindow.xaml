@@ -35,7 +35,22 @@
             <Button Name="selectByValueButton" Content="Select row by value" Click="selectByValueButton_Click"
                 Width="130" Height="30" Margin="10,15,15,0" VerticalAlignment="Top"/>
 
+        </StackPanel>
 
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            
+            <Button Name="updateAllRowsButton" Content="Update all rows" Click="updateAllRowsButton_Click"
+                Width="130" Height="30" Margin="10,15,15,0" VerticalAlignment="Center"/>
+
+            <Button Name="update1RowsButton" Content="Update 1 row" Click="update1RowsButton_Click"
+                Width="130" Height="30" Margin="10,15,15,0" VerticalAlignment="Center"/>
+
+
+            <Button Name="delete1rowButton" Content="Delete 1 row" Click="delete1rowButton_Click"
+                Width="130" Height="30" Margin="10,15,15,0" VerticalAlignment="Center"/>
+
+            <Button Name="deleteAllRowsButton" Content="Delete all rows" Click="deleteAllRowsButton_Click"
+                Width="130" Height="30" Margin="10,15,15,0" VerticalAlignment="Center"/>
 
         </StackPanel>
         

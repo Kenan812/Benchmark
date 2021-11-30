@@ -100,8 +100,58 @@ namespace Benchmark
             }
         }
 
+        private void updateAllRowsButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                queries.UpdateAllRows();
+                UpdateDataGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void update1RowsButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                queries.Update1Row();
+                UpdateDataGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
 
+        private void delete1rowButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                queries.Delete1Row();
+                UpdateDataGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void deleteAllRowsButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                queries.DeleteAllRows();
+                UpdateDataGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         private void UpdateDataGrid()
         {
@@ -120,7 +170,5 @@ namespace Benchmark
 
             sqlConnection.Close();
         }
-
-      
     }
 }

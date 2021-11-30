@@ -161,6 +161,112 @@ namespace Benchmark
             }
         }
 
+        public void UpdateAllRows()
+        {
+            try
+            {
+                EmptyResultsTable();
+                long timing;
+
+                timing = _adoNetQueries.UpdateAllRows();
+                AddResult("ADO.NET", timing);
+
+                timing = _eFqueries.UpdateAllRows();
+                AddResult("Entity Framework", timing);
+
+
+                timing = _dapperQueries.UpdateAllRows();
+                AddResult("Dapper", timing);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                _sqlConnection.Close();
+            }
+        }
+
+        public void Update1Row()
+        {
+            try
+            {
+                EmptyResultsTable();
+                long timing;
+
+                timing = _adoNetQueries.Update1Row();
+                AddResult("ADO.NET", timing);
+
+                timing = _eFqueries.Update1Row();
+                AddResult("Entity Framework", timing);
+                
+                timing = _dapperQueries.Update1Row();
+                AddResult("Dapper", timing);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                _sqlConnection.Close();
+            }
+        }
+
+
+        public void Delete1Row()
+        {
+            try
+            {
+                EmptyResultsTable();
+                long timing;
+
+                timing = _adoNetQueries.Delete1Row();
+                AddResult("ADO.NET", timing);
+
+                timing = _eFqueries.Delete1Row();
+                AddResult("Entity Framework", timing);
+
+                timing = _dapperQueries.Delete1Row();
+                AddResult("Dapper", timing);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                _sqlConnection.Close();
+            }
+        }
+
+
+        public void DeleteAllRows()
+        {
+            try
+            {
+                EmptyResultsTable();
+                long timing;
+
+                timing = _adoNetQueries.DeleteAllRows();
+                AddResult("ADO.NET", timing);
+
+                timing = _eFqueries.DeleteAllRows();
+                AddResult("Entity Framework", timing);
+
+                timing = _dapperQueries.DeleteAllRows();
+                AddResult("Dapper", timing);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                _sqlConnection.Close();
+            }
+        }
 
 
 
